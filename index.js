@@ -66,11 +66,9 @@ function collectEntryResources(module, level = 0) {
     module.dependencies.forEach(dep => {
       if (dep && (dep.module || dep.originModule)) {
         const nextModule = dep.module || dep.originModule;
-        if (_collectedModules.indexOf(nextModule.id) === -1) {
-          _collectedModules.push(nextModule.id);
-          const depResources = collectEntryResources(nextModule, level + 1);
-          Array.prototype.push.apply(resources, depResources);
-        }
+        _collectedModules.push(nextModule.id);
+        const depResources = collectEntryResources(nextModule, level + 1);
+        Array.prototype.push.apply(resources, depResources);
       }
     });
   }
